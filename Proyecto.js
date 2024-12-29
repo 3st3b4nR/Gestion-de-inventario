@@ -11,11 +11,23 @@ function agregarProducto(producto) {
     }
 }
 
+
 function listarProductos() {
     if (inventario.length === 0) {
         console.log("No hay productos en el inventario.");
     } else {
         console.log("Productos en el inventario:");
         inventario.forEach(producto => console.log(producto));
+    }
+}
+
+
+function actualizarStock(id, nuevoStock) {
+    const producto = inventario.find(p => p.id === id);
+    if (producto) {
+        producto.stock = nuevoStock;
+        console.log(`Stock actualizado: ${JSON.stringify(producto)}`);
+    } else {
+        console.log(`Producto con id ${id} no encontrado.`);
     }
 }
