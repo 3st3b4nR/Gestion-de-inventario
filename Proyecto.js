@@ -10,3 +10,12 @@ function agregarProducto(producto) {
         console.log(`Producto agregado: ${JSON.stringify(producto)}`);
     }
 }
+
+function listarProductos() {
+    if (inventario.length === 0) {
+        console.log("No hay productos en el inventario.");
+    } else {
+        console.log("Productos en el inventario:");
+        inventario.forEach(producto => console.log(producto));
+    }
+}
