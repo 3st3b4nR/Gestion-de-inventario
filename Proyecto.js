@@ -31,3 +31,41 @@ function actualizarStock(id, nuevoStock) {
         console.log(`Producto con id ${id} no encontrado.`);
     }
 }
+
+function eliminarProducto(id) {
+    const indice = inventario.findIndex(p => p.id === id);
+    if (indice !== -1) {
+        const eliminado = inventario.splice(indice, 1);
+        console.log(`Producto eliminado: ${JSON.stringify(eliminado[0])}`);
+    } else {
+        console.log(`Producto con id ${id} no encontrado.`);
+    }
+}
+
+
+
+// [{},{},{},{}]
+// splice > [{}]
+//             1
+//  0,1,2,3,4,5,6
+
+//  const posicion1 = eliminado[0]
+// find => encuentre
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
