@@ -5,9 +5,9 @@ function agregarProducto(producto) {
     if (inventario.some(p => p.nombre.toLowerCase() === producto.nombre.toLowerCase())) {
         console.log(`El producto con nombre "${producto.nombre}" ya existe en el inventario.`);
     } else {
-        producto.id = siguienteId++;
-        inventario.push(producto);
-        console.log(`Producto agregado: ${JSON.stringify(producto)}`);
+    producto.id = siguienteId++;
+    inventario.push(producto);
+    console.log(`Producto agregado: ${JSON.stringify(producto)}`);
     }
 }
 
@@ -25,8 +25,8 @@ function listarProductos() {
 function actualizarStock(id, nuevoStock) {
     const producto = inventario.find(p => p.id === id);
     if (producto) {
-        producto.stock = nuevoStock;
-        console.log(`Stock actualizado: ${JSON.stringify(producto)}`);
+    producto.stock = nuevoStock;
+    console.log(`Stock actualizado: ${JSON.stringify(producto)}`);
     } else {
         console.log(`Producto con id ${id} no encontrado.`);
     }
