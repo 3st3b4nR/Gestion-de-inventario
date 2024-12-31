@@ -42,7 +42,22 @@ function eliminarProducto(id) {
     }
 }
 
+function buscarProducto(nombre) {
+    const resultados = inventario.filter(p => p.nombre.toLowerCase().includes(nombre.toLowerCase()));
+    if (resultados.length > 0) {
+        console.log("Resultados de la búsqueda:");
+        resultados.forEach(producto => console.log(producto));
+    } else {
+        console.log(`No se encontraron productos con el nombre: ${nombre}`);
+    }
+}
 
+
+// nombre === "camisA negra"
+
+// const nombre = "camisa roja"
+// nombre.includes("camisa") === verderao
+// nombre.includes("roja") => ["camisa", "roja"]
 
 // [{},{},{},{}]
 // splice > [{}]
