@@ -1,0 +1,39 @@
+img {
+display: block; 
+margin-left: auto;
+margin-right: auto;
+}
+
+body {
+    background-color: orange;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1{
+border: 5px solid white;
+padding: 0 50px;
+margin: 60 0 0 0;
+text-align: center;
+color: white;
+}
+
+h1, h3 {
+    text-align: center;
+    color: white;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Centra los botones horizontalmente */
+    gap: 10px; /* Espacio entre los botones */
+    margin-top: 20px; /* Espacio superior para la separación */
+}
+
+button {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
