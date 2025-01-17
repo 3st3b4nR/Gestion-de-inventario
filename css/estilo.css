@@ -1,7 +1,8 @@
 img {
-display: block; 
-margin-left: auto;
-margin-right: auto;
+    border-radius: 40px;
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
 }
 
 body {
@@ -12,11 +13,11 @@ body {
 }
 
 h1{
-border: 5px solid white;
-padding: 0 50px;
-margin: 60 0 0 0;
-text-align: center;
-color: white;
+    border: 5px solid white;
+    padding: 0 50px;
+    margin: 60 0 0 0;
+    text-align: center;
+    color: white;
 }
 
 h1, h3 {
@@ -26,9 +27,9 @@ h1, h3 {
 
 .button-container {
     display: flex;
-    justify-content: center; /* Centra los botones horizontalmente */
-    gap: 10px; /* Espacio entre los botones */
-    margin-top: 20px; /* Espacio superior para la separación */
+    justify-content: center;
+    gap: 10px; 
+    margin-top: 20px; 
 }
 
 button {
@@ -36,4 +37,9 @@ button {
     color: white;
     padding: 10px;
     border-radius: 10px;
+}
+
+button:hover {
+    background-color: white;
+    color: black;
 }
