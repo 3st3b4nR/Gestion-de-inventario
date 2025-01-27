@@ -93,7 +93,7 @@
           const stock = document.getElementById("ProductoStock").value;
           if (nombre.trim() && stock > 0) {
             // agregarProducto(nombre, stock);
-            agregarProducto({ nombre, stock });
+            agregarProducto( nombre, stock );
             document.getElementById("ProductoP").value = "";
             document.getElementById("ProductoStock").value = "";
           } else {
