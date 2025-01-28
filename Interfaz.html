@@ -42,7 +42,7 @@
         }
       }
 
-      function actualizarStock(nonmbre, nuevoStock) {
+      function actualizarStock(nombre, nuevoStock) {
         const producto = inventario.find((p) => p.nombre === nombre);
         if (producto) {
           producto.stock = nuevoStock;
@@ -77,10 +77,15 @@
 
       function buscarProducto(nombre) {
         const resultado = inventario.find(
-          (p) => p.nombre.toLowerCase() === nombre
+          (p) => p.nombre.toLowerCase() === nombre.toLowerCase()
         );
-        if (resultados) {
-          alert("Resultados de la búsqueda:" + resultado);
+        if (resultado) {
+          alert(
+            "Resultados de la búsqueda:\n" +
+              Object.keys(resultado)
+                .map((key) => `${key}: ${resultado[key]}`) // Mapea cada clave y su valor
+                .join("\n") // Une los resultados con un salto de línea
+          );
         } else {
           alert(`No se encontraron productos con el nombre: ${nombre}`);
         }
@@ -93,7 +98,7 @@
           const stock = document.getElementById("ProductoStock").value;
           if (nombre.trim() && stock > 0) {
             // agregarProducto(nombre, stock);
-            agregarProducto( nombre, stock );
+            agregarProducto(nombre, stock);
             document.getElementById("ProductoP").value = "";
             document.getElementById("ProductoStock").value = "";
           } else {
@@ -145,6 +150,17 @@
             document.getElementById("ProductoStock").value = "";
           } else {
             return alert("Debe ingresar el nombre del producto y el stock.");
+          }
+        });
+
+        // buscar producto
+        document.getElementById("btn_buscar").addEventListener("click", () => {
+          const nombre = document.getElementById("ProductoP").value;
+          if (nombre.trim()) {
+            buscarProducto(nombre);
+            document.getElementById("ProductoP").value = "";
+          } else {
+            return alert("Debe ingresar el nombre del producto a buscar.");
           }
         });
       });
