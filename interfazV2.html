@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Inventario</title>
+    <link rel="stylesheet" type="text/css" href="css/estilo.css" />
+    <script>
+        let inventario = [];
+        let siguienteId = 1;
+
+        // Función para renderizar la tabla
+        function renderizarTabla() {
+            const tabla = document.getElementById("tabla-inventario");
+            tabla.innerHTML = ""; // Limpiar la tabla
+
+            inventario.forEach((producto) => {
+                const fila = document.createElement("tr");
+
+                fila.innerHTML = `
+                    <td>${producto.id}</td>
+                    <td>${producto.nombre}</td>
+                    <td>${producto.stock}</td>
+                    <td><button onclick="editarProducto(${producto.id})">Editar</button></td>
+                    <td><button onclick="eliminarProducto(${producto.id})">Eliminar</button></td>
+                `;
+
+                tabla.appendChild(fila);
+            });
+        }
+
+        // Agregar producto
+        function agregarProducto() {
+            const nombre = document.getElementById("ProductoP").value.trim();
+            const stock = parseInt(document.getElementById("ProductoStock").value);
+
+            if (!nombre || isNaN(stock) || stock < 0) {
+                alert("Debe ingresar un nombre válido y un stock mayor o igual a 0.");
+                return;
+            }
+
+            if (inventario.some(p => p.nombre.toLowerCase() === nombre.toLowerCase())) {
+                alert(`El producto "${nombre}" ya existe.`);
+                return;
+            }
+
+            const producto = {
+                id: siguienteId++,
+                nombre,
+                stock
+            };
+
+            inventario.push(producto);
+            renderizarTabla();
+
+            // Limpiar inputs
+            document.getElementById("ProductoP").value = "";
+            document.getElementById("ProductoStock").value = "";
+
+
+        }
+
+        // Eliminar producto por ID
+        function eliminarProducto(id) {
+            inventario = inventario.filter(producto => producto.id !== id);
+            renderizarTabla();
+        }
+
+        // Buscar producto
+        function buscarProducto() {
+            const nombre = document.getElementById("ProductoP").value.trim().toLowerCase();
+
+            if (!nombre) {
+                alert("Debe ingresar un nombre para buscar.");
+                return;
+            }
+
+            const resultado = inventario.filter(producto => producto.nombre.toLowerCase().includes(nombre));
+
+            if (resultado.length > 0) {
+                alert("Productos encontrados:\n" + resultado.map(p => `ID: ${p.id}, Nombre: ${p.nombre}, Stock: ${p.stock}`).join("\n"));
+            } else {
+                alert(`No se encontraron productos con el nombre: ${nombre}`);
+            }
+        }
+
+        // Editar producto
+        function editarProducto(id) {
+            const producto = inventario.find(p => p.id === id);
+            if (producto) {
+                const nuevoStock = prompt(`Ingrese el nuevo stock para "${producto.nombre}"`, producto.stock);
+                if (nuevoStock !== null && !isNaN(nuevoStock) && nuevoStock >= 0) {
+                    producto.stock = parseInt(nuevoStock);
+                    renderizarTabla();
+                } else {
+                    alert("Debe ingresar un stock válido.");
+                }
+            }
+        }
+
+        // Listar productos (se actualiza con renderizarTabla)
+        function listarProductos() {
+            renderizarTabla();
+        }
+
+        // Evento al cargar la página
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("btn_agregar").addEventListener("click", agregarProducto);
+            document.getElementById("btn_listar").addEventListener("click", listarProductos);
+            document.getElementById("btn_buscar").addEventListener("click", buscarProducto);
+        });
+    </script>
+</head>
+<body>
+    <img
+    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiFasTVopwuOBfElXC-82e2Mefb0KBYiuXmA&s"
+    width="500"
+    height="125"
+  />
+    <h1>GESTIÓN DE INVENTARIO</h1>
+    <h3>Página de inventario administración PAVAS</h3>
+
+    <div class="input-container">
+        <input type="text" id="ProductoP" placeholder="Nombre del producto" />
+        <input type="number" id="ProductoStock" placeholder="Stock del producto" />
+    </div>
+
+    <div class="button-container">
+        <button id="btn_agregar">Agregar producto</button>
+        <button id="btn_listar">Listar inventario</button>
+        <button id="btn_buscar">Buscar producto</button>
+    </div>
+
+    <table border="1">
+        <caption>INVENTARIO</caption>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Stock</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody id="tabla-inventario">
+            <!-- Los productos se agregarán aquí dinámicamente -->
+        </tbody>
+    </table>
+</body>
+</html>
